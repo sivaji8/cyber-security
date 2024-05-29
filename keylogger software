@@ -1,0 +1,32 @@
+def password_cracker(password, dictionary):
+    """
+    Function to crack a password using a dictionary attack.
+    
+    Args:
+    - password (str): The password to be cracked.
+    - dictionary (list): List of common passwords or dictionary words.
+    
+    Returns:
+    - cracked_password (str): The cracked password, if found. Otherwise, None.
+    """
+    for word in dictionary:
+        if word.strip() == password:
+            return word.strip()
+    return None
+
+def main():
+    password = input("Enter the password to crack: ")
+    dictionary_file = "common_passwords.txt"  # Path to a file containing common passwords, one per line
+    try:
+        with open(dictionary_file, 'r') as f:
+            dictionary = f.readlines()
+        cracked_password = password_cracker(password, dictionary)
+        if cracked_password:
+            print("Password cracked:", cracked_password)
+        else:
+            print("Password not found in dictionary.")
+    except FileNotFoundError:
+        print("Dictionary file not found.")
+
+if _name_ == "_main_":
+    main()
